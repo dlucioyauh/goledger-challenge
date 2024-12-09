@@ -4,11 +4,12 @@ import axiosConfig from './utils/axiosConfig';
 interface Artist {
   id: string;
   name: string;
-  
 }
 
 function App() {
-  const [artists, setArtists] = useState<Artist[]>([]); 
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,12 +21,15 @@ function App() {
             }
           }
         });
-        
-        // Supondo que a resposta da API tenha uma estrutura como { data: { artists: [...] } }
-        setArtists(response.data); 
+
+        const fetchedArtists = Array.isArray(response.data) ? response.data : [];
+        setArtists(fetchedArtists);
+        setLoading(false);
         console.log(response.data); 
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
+        setError('Failed to fetch data');
+        setLoading(false);
       }
     };
 
@@ -35,12 +39,16 @@ function App() {
   return (
     <div className="App">
       <h1>GoLedger Challenge</h1>
-      <p>Veja o console para os dados dos artistas.</p>
-
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
       <ul>
-        {artists.map((artist) => (
-          <li key={artist.id}>{artist.name}</li>
-        ))}
+        {artists.length > 0 ? (
+          artists.map((artist) => (
+            <li key={artist.id}>{artist.name}</li>
+          ))
+        ) : (
+          <p>No artists found</p>
+        )}
       </ul>
     </div>
   );

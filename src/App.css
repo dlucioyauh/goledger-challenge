@@ -40,3 +40,60 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Estilo para o contêiner da lista de artistas */
+.artist-list {
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.artist-list__title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.artist-list__items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.artist-list__item {
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.artist-list__item:hover {
+  transform: scale(1.03);
+}
+
+.artist-list__name {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.artist-list__last-updated {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.loading {
+  text-align: center;
+  color: #888;
+}
+
+.error {
+  text-align: center;
+  color: #f44336;
+  font-weight: bold;
+}
