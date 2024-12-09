@@ -6,7 +6,7 @@ export const getSchema = async (assetType: string) => {
     const response = await axiosConfig.post('getSchema', {
       assetType
     });
-    return response.data;
+    return response.data; // Retorna os detalhes sobre o schema do asset
   } catch (error) {
     console.error('Erro ao obter o schema:', error);
     throw error;
@@ -42,12 +42,13 @@ export const updateAsset = async (assetType: string, assetId: string, data: obje
   }
 };
 
-// Função para deletar um asset
-export const deleteAsset = async (assetType: string, assetId: string) => {
+// Função para deletar um asset com a opção de "cascade"
+export const deleteAsset = async (assetType: string, assetId: string, cascade: boolean = false) => {
   try {
     const response = await axiosConfig.post('deleteAsset', {
       assetType,
-      assetId
+      assetId,
+      cascade // Adicionando o campo cascade ao payload
     });
     return response.data;
   } catch (error) {
@@ -70,6 +71,17 @@ export const searchAssets = async (assetType: string, query: object) => {
     return response.data;
   } catch (error) {
     console.error('Erro ao pesquisar assets:', error);
+    throw error;
+  }
+};
+
+// Função para obter detalhes de transações (como deleteAsset, etc.)
+export const getTx = async (transactionName: string) => {
+  try {
+    const response = await axiosConfig.post('getTx', { transactionName });
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao obter transação:', error);
     throw error;
   }
 };
