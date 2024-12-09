@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: 'https://api.exemplo.com', // Substitua com a URL da API
+const axiosConfig = axios.create({
+  baseURL: 'http://ec2-54-91-215-149.compute-1.amazonaws.com',
   headers: {
-    'Authorization': 'Basic ' + btoa('psAdmin' + ':' + 'goledger')
+    'Content-Type': 'application/json',
+    'Authorization': 'Basic ' + btoa('psAdmin:goledger'),
   }
 });
 
-export default axiosInstance;
+export default axiosConfig;
