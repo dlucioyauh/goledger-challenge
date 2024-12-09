@@ -1,18 +1,34 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '../utils/axiosConfig';
 
+// Define a interface para o artista
+interface Artist {
+  id: string;
+  name: string;
+}
+
 const ArtistList = () => {
-  const [artists, setArtists] = useState<any[]>([]);
+  const [artists, setArtists] = useState<Artist[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    axiosInstance.get('/artists') // Substitua com o endpoint correto
+    // Requisição POST com o payload correto
+    axiosInstance.post('/api/query/search', {
+      query: {
+        selector: {
+          '@assetType': 'artist'
+        }
+      }
+    })
       .then(response => {
-        setArtists(response.data);
+        console.log(response.data);  
+        const fetchedArtists = Array.isArray(response.data) ? response.data : [];
+        setArtists(fetchedArtists);  
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
+        console.error('Erro ao buscar dados:', err);  
         setError('Failed to fetch data');
         setLoading(false);
       });
@@ -25,9 +41,13 @@ const ArtistList = () => {
     <div>
       <h2>Artists</h2>
       <ul>
-        {artists.map((artist) => (
-          <li key={artist.id}>{artist.name}</li> // Ajuste conforme a estrutura dos dados
-        ))}
+        {Array.isArray(artists) && artists.length > 0 ? (
+          artists.map((artist) => (
+            <li key={artist.id}>{artist.name}</li>
+          ))
+        ) : (
+          <p>No artists found</p>
+        )}
       </ul>
     </div>
   );
