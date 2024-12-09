@@ -1,50 +1,108 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# GoLedger Challenge - Blockchain Music Platform
 
-Currently, two official plugins are available:
+## Descrição do Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este projeto é uma aplicação React que utiliza a API da GoLedger para gerenciar registros em blockchain. A proposta principal é exibir artistas cadastrados na plataforma, utilizando tecnologias modernas e boas práticas de desenvolvimento.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Funcionalidades Implementadas
 
-- Configure the top-level `parserOptions` property like this:
+- **Exibição de Artistas**:  
+  A aplicação consome o endpoint `/api/query/search` para buscar e exibir artistas registrados na blockchain.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Feedback ao Usuário**:  
+  Mensagens de carregamento, erros e ausência de dados são exibidas de forma clara para melhorar a experiência do usuário.
+
+- **Estrutura Modular**:  
+  A arquitetura do código facilita futuras expansões para inclusão de álbuns, músicas e playlists.
+
+- **Design Responsivo e Simples**:  
+  Layout adaptado para diferentes tamanhos de tela com uma interface limpa e funcional.
+
+---
+
+## Tecnologias Utilizadas
+
+- **React**: Biblioteca para criação da interface de usuário.
+- **TypeScript**: Tipagem estática para maior confiabilidade do código.
+- **Axios**: Para consumo da API.
+- **React Router**: Gerenciamento de rotas.
+- **CSS**: Estilização customizada.
+- **Vite**: Ferramenta para desenvolvimento rápido e eficiente.
+
+---
+
+## Instalação e Execução
+
+### Pré-requisitos
+- Node.js v16+ instalado.
+- Gerenciador de pacotes `npm` ou `yarn`.
+
+### Passos para rodar a aplicação:
+
+1. Clone este repositório:
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   cd <NOME_DO_PROJETO>
+   ```
+
+2. Instale as dependências:
+   ```bash
+   npm install
+   # ou
+   yarn
+   ```
+
+3. Inicie o servidor local:
+   ```bash
+   npm run dev
+   # ou
+   yarn dev
+   ```
+
+4. Acesse a aplicação no navegador em:
+   ```
+   http://localhost:5173
+   ```
+
+---
+
+## Limitações e Próximos Passos
+
+### Limitações:
+- A aplicação atual exibe apenas **artistas**. As funcionalidades para exibição de álbuns, músicas e playlists não foram implementadas devido ao prazo do desafio.
+
+### Próximos Passos:
+- Implementar os endpoints para listar álbuns, músicas e playlists.
+- Adicionar suporte à criação, edição e exclusão de assets utilizando a API.
+- Melhorar o design para uma experiência mais rica ao usuário.
+
+---
+
+## Considerações sobre a API
+
+- **Transações**:  
+  A API suporta operações como `deleteAsset` com suporte a cascata para exclusão de assets relacionados.
+
+- **Schemas**:  
+  Para obter detalhes sobre os assets e suas propriedades, utilize o endpoint `/getSchema`.
+
+- **Swagger**:  
+  A API possui documentação completa no Swagger. Endpoints como `/getTx` e `/getSchema` foram explorados para entender as regras de negócio.
+
+---
+
+## Contribuição
+
+Este projeto foi desenvolvido como parte de um desafio técnico da GoLedger. Sugestões e feedbacks são bem-vindos!
+
+---
+
+## Autor
+
+Douglas Lucio - Desenvolvedor Full Stack  
+[LinkedIn](https://www.linkedin.com/in/douglaslucio) | [Email](mailto:dlucio.douglas@gmail.com)
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
